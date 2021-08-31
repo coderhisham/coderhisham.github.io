@@ -2093,3 +2093,7 @@ hr {
 .typed{
   color: red;
 }
+
+#testimonials{
+  overflow:hidden;
+}
