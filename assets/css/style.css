@@ -2098,3 +2098,6 @@ hr {
   overflow:hidden;
   
 }
+.carousel-indicators li{
+  background-color: rebeccapurple;
+}
