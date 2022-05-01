@@ -32,6 +32,32 @@
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+
+
+    <!--Email.js-->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            // https://dashboard.emailjs.com/admin/account
+            emailjs.init('6fih5j9xZ2yKxTqyZ');
+        })();
+    </script>
+    <script type="text/javascript">
+        window.onload = function() {
+            document.getElementById('contact-form').addEventListener('submit', function(event) {
+                event.preventDefault();
+                // generate a five digit number for the contact_number variable
+                this.contact_number.value = Math.random() * 100000 | 0;
+                // these IDs from the previous steps
+                emailjs.sendForm('contact_service', 'contact_form', this)
+                    .then(function() {
+                        console.log('SUCCESS!');
+                    }, function(error) {
+                        console.log('FAILED...', error);
+                    });
+            });
+        }
+    </script>
 </head>
 <body>
   <div id="progressbar"></div>
@@ -703,19 +729,20 @@
               </div>
             </div>
             <div class="map-content-9">
-              <form id=contact-form action="assets/contact.php" method="post">
+              <form id=contact-form>
                 <div class="twice-two">
-                  <input type="text" class="form-control" name="Name" id="Name" placeholder="Name" required="">
-                  <input type="email" class="form-control" name="Sender" id="Sender" placeholder="Email"
+                  <input type="hidden" name="contact_number">
+                  <input type="text" class="form-control" name="user_name" id="Name" placeholder="Name" required="">
+                  <input type="email" class="form-control" name="user_email" id="Sender" placeholder="Email"
                     required="">
                 </div>
                 <div class="twice">
-                  <input type="text" class="form-control" name="Subject" id="Subject" placeholder="Subject"
+                  <input type="text" class="form-control" name="subject" id="Subject" placeholder="Subject"
                     required="">
                 </div>
-                <textarea name="Message" class="form-control" id="Message" placeholder="Message"
+                <textarea name="message" class="form-control" id="Message" placeholder="Message"
                   required=""></textarea>
-                <button type="submit" class="btn btn-contact">Send Message</button>
+                <button type="submit" class="btn btn-contact" value="send">Send Message</button>
               </form>
             </div>
           </div>
